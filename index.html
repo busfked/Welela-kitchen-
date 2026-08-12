@@ -51,7 +51,7 @@
             position: relative;
         }
 
-        /* 3 Vertical Dots Border Button */
+        /* 3 Vertical Dots Button */
         .dots-btn {
             background: none;
             border: 1.5px solid var(--dark);
@@ -93,10 +93,10 @@
             display: block !important;
         }
 
-        /* Hero Header */
+        /* Cover Area Banner Graphic */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('https://pexels.com') center/cover;
-            height: 160px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("data:image/svg+xml,%3Csvg xmlns='http://w3.org' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 0h100v100H0z' fill='%232c3e50'/%3E%3Cpath d='M10 20h80v1H10zm0 20h80v1H10zm0 20h80v1H10zm0 20h80v1H10z' fill='%2334495e' opacity='0.3'/%3E%3C/svg%3E");
+            height: 140px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -123,7 +123,7 @@
             margin: 0 auto;
         }
 
-        /* Cards */
+        /* Card Layouts */
         .fancy-card {
             background: var(--card-bg);
             border-radius: 16px;
@@ -132,11 +132,22 @@
             margin-bottom: 25px;
         }
 
+        /* Embedded Graphic Banners */
         .card-img-banner {
             width: 100%;
-            height: 160px;
-            object-fit: cover;
-            display: block;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .restaurant-bg {
+            background-image: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%);
+        }
+
+        .catering-bg {
+            background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
         }
 
         .card-body {
@@ -167,7 +178,7 @@
             margin-bottom: 2px;
         }
 
-        /* Fixed Touch-Friendly Inputs */
+        /* Fixed Complete Touch Forms Layout */
         .form-group {
             margin-bottom: 16px;
         }
@@ -188,7 +199,6 @@
             font-size: 1rem;
             background: #fff;
             outline: none;
-            -webkit-appearance: none;
         }
 
         .form-input:focus {
@@ -208,7 +218,7 @@
             margin-top: 10px;
         }
 
-        /* Fixed Pop-up Modal */
+        /* Interactive Voucher Popup */
         .popup-overlay {
             display: none;
             position: fixed;
@@ -232,15 +242,36 @@
             text-align: center;
         }
 
+        /* Animated Green Success Badge */
+        .success-badge {
+            width: 60px;
+            height: 60px;
+            background: #10ac84;
+            color: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            animation: popCheck 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popCheck {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
         .receipt-ticket {
             background: #f8f9fa;
             border-left: 4px solid var(--primary);
-            padding: 12px;
+            padding: 14px;
             border-radius: 6px;
             text-align: left;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             margin: 15px 0;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .tg-redirect-btn {
@@ -277,7 +308,7 @@
         </div>
     </div>
 
-    <!-- Top Banner Image -->
+    <!-- Header Banner Description -->
     <div class="hero">
         <h1>Welela Kitchen</h1>
         <p>Gourmet Restaurant & Event Catering Excellence</p>
@@ -285,9 +316,9 @@
 
     <div class="main-content">
 
-        <!-- Info Card with High-Availability Restaurant Image -->
+        <!-- Profile Detail Card -->
         <div class="fancy-card" id="services-section">
-            <img src="https://pexels.com" class="card-img-banner" alt="Restaurant Profile Image">
+            <div class="card-img-banner restaurant-bg">🍽️</div>
             <div class="card-body">
                 <h2>Restaurant Profile</h2>
                 
@@ -317,23 +348,8 @@
             </div>
         </div>
 
-        <!-- Form Card with High-Availability Catering Image -->
+        <!-- Booking Interactive Card Layout Fixed -->
         <div class="fancy-card" id="booking-section">
-            <img src="https://pexels.com" class="card-img-banner" alt="Catering Event Image">
+            <div class="card-img-banner catering-bg">🎉</div>
             <div class="card-body">
                 <h2>Catering Request Form</h2>
-                <form id="cateringBookingForm">
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="clientName">Full Name</label>
-                        <input type="text" class="form-input" id="clientName" required placeholder="Enter your name">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="clientPhone">Phone Number</label>
-                        <input type="tel" class="form-input" id="clientPhone" required placeholder="09...">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="tierSelection">Expected Number of Guests</label>
-                        <select class="form-input" id="tierSelection" required>
