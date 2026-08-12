@@ -340,4 +340,672 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-300 mb-2" data-am="የአጋጣሚ ዓይነት *">Event Type *</label>
-                        <select id="bEvent" required class="form-input w-full px-
+                        <select id="bEvent" required class="form-input w-full px-4 py-3.5 rounded-xl text-sm">
+                            <option value="" class="bg-navy-800" data-am="የአጋጣሚ ዓይነት ይምረጡ">Select event type</option>
+                            <option value="wedding" class="bg-navy-800" data-am="ሰርግ">Wedding</option>
+                            <option value="birthday" class="bg-navy-800" data-am="ልደት ቀን">Birthday Party</option>
+                            <option value="corporate" class="bg-navy-800" data-am="ኩባንያ">Corporate Event</option>
+                            <option value="family" class="bg-navy-800" data-am="ቤተሰብ">Family Gathering</option>
+                            <option value="funeral" class="bg-navy-800" data-am="ሞት ስርዓት">Funeral / Memorial</option>
+                            <option value="other" class="bg-navy-800" data-am="ሌላ">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2" data-am="የአጋጣሚ ቀን *">Event Date *</label>
+                        <input type="date" id="bDate" required class="form-input w-full px-4 py-3.5 rounded-xl text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2" data-am="የእንግዲዎች ቁጥር *">Number of Guests *</label>
+                        <input type="number" id="bGuests" required min="1" placeholder="50" class="form-input w-full px-4 py-3.5 rounded-xl text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2" data-am="በጀት መጠን *">Budget Range *</label>
+                        <select id="bBudget" required class="form-input w-full px-4 py-3.5 rounded-xl text-sm">
+                            <option value="" class="bg-navy-800" data-am="በጀት ይምረጡ">Select budget</option>
+                            <option value="below200" class="bg-navy-800" data-am="ከ$200 በታች">Below $200</option>
+                            <option value="200-1000" class="bg-navy-800">$200 – $1,000</option>
+                            <option value="above1000" class="bg-navy-800" data-am="ከ$1,000 በላይ">Above $1,000</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2" data-am="ቦታ / አድራሻ">Venue / Location</label>
+                        <input type="text" id="bLocation" placeholder="Event address or venue name" class="form-input w-full px-4 py-3.5 rounded-xl text-sm">
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <label class="block text-sm font-medium text-slate-300 mb-2" data-am="ልዩ ጥያቄዎች / ዝርዝር ምርጫዎች">Special Requests / Menu Preferences</label>
+                    <textarea id="bNotes" rows="4" placeholder="Any dietary requirements, specific dishes you want, decoration needs..." class="form-input w-full px-4 py-3.5 rounded-xl text-sm resize-none"></textarea>
+                </div>
+                <button type="submit" id="submitBtn" class="mt-8 w-full py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-navy-950 font-bold text-base rounded-2xl hover:shadow-xl hover:shadow-gold-500/25 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="send" class="w-5 h-5"></i>
+                    <span data-am="የቦታ ማስያዝ ጥያቄ ይላኩ">Submit Booking Request</span>
+                </button>
+                <p class="text-center text-xs text-slate-500 mt-4" data-am="በ2 ሰዓት ውስጥ በስልክ ወይም ኢሜይል እንገናኝዎታለን።">We'll confirm your booking via phone or email within 2 hours.</p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact" class="relative py-24 lg:py-32 blue-texture-strong">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div class="reveal grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-xs font-bold text-gold-400 tracking-widest uppercase" data-am="ያግኙን">Get In Touch</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-3 tracking-tight" data-am="በምግብ ቤታችን ይጎበኙ">Visit Our Kitchen</h2>
+                <p class="text-slate-400 mt-4 leading-relaxed" data-am="በግል ይጎበኙን! ምግብ ለመመገብ፣ የስራ ምግብ ዓይነቶችን ለመወያየት ሁልጊዜ እንኳይ ውስጥ ይግቡ።">Come see us in person! You're always welcome to visit the kitchen, taste our food, and discuss your catering needs directly.</p>
+                <div class="mt-8 space-y-5">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center flex-shrink-0"><i data-lucide="map-pin" class="w-5 h-5 text-blue-400"></i></div>
+                        <div>
+                            <p class="text-white font-semibold text-sm" data-am="አካባቢ">Location</p>
+                            <!-- ===== PUT REAL ADDRESS HERE ===== -->
+                            <p class="text-slate-400 text-sm" id="realAddress">Welela Kitchen, Main Street, Near Town Center</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-green-500/10 flex items-center justify-center flex-shrink-0"><i data-lucide="phone" class="w-5 h-5 text-green-400"></i></div>
+                        <div>
+                            <p class="text-white font-semibold text-sm" data-am="ስልክ / ዋትስአፕ">Phone / WhatsApp</p>
+                            <!-- ===== PUT REAL PHONE HERE ===== -->
+                            <p class="text-slate-400 text-sm" id="realPhone">+254 7XX XXX XXX</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-gold-500/10 flex items-center justify-center flex-shrink-0"><i data-lucide="clock" class="w-5 h-5 text-gold-400"></i></div>
+                        <div>
+                            <p class="text-white font-semibold text-sm" data-am="የስራ ሰዓቶች">Working Hours</p>
+                            <p class="text-slate-400 text-sm" data-am="ሰኞ - ቅዳሜ: 6:00 AM – 10:00 PM">Mon – Sat: 6:00 AM – 10:00 PM</p>
+                            <p class="text-slate-400 text-sm" data-am="እሁድ: 8:00 AM – 8:00 PM">Sunday: 8:00 AM – 8:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-3 mt-8">
+                    <!-- ===== PUT REAL SOCIAL LINKS HERE ===== -->
+                    <a href="#" class="w-11 h-11 rounded-xl border border-white/10 flex items-center justify-center hover:border-gold-400/40 hover:text-gold-400 text-slate-400 transition-all"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                    <a href="#" class="w-11 h-11 rounded-xl border border-white/10 flex items-center justify-center hover:border-gold-400/40 hover:text-gold-400 text-slate-400 transition-all"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                    <a href="#" class="w-11 h-11 rounded-xl border border-white/10 flex items-center justify-center hover:border-gold-400/40 hover:text-gold-400 text-slate-400 transition-all"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                    <a href="#" id="whatsappLink" class="w-11 h-11 rounded-xl border border-green-500/20 flex items-center justify-center hover:border-green-400/40 hover:text-green-400 text-green-400 transition-all"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+            <div class="reveal rounded-3xl overflow-hidden border border-white/5 relative h-[400px] md:h-[500px]" style="transition-delay:200ms" id="exteriorImg">
+                <img src="PLACEHOLDER_EXTERIOR" alt="Welela Kitchen Exterior" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-navy-950/40"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-gold-500/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 border border-gold-500/30"><i data-lucide="map-pin" class="w-8 h-8 text-gold-400"></i></div>
+                        <p class="text-white font-bold text-lg">Welela Kitchen</p>
+                        <p class="text-slate-300 text-sm mt-1" data-am="ለአቅጣጫ ይጫኑ">Tap for directions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== ADMIN LOGIN LINK (hidden in footer) ==================== -->
+<footer class="border-t border-white/5 py-12">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center"><i data-lucide="chef-hat" class="w-4 h-4 text-navy-950"></i></div>
+                <span class="text-sm font-semibold text-white">Welela Kitchen & Catering</span>
+            </div>
+            <p class="text-xs text-slate-500">© 2025 Welela Kitchen. All rights reserved. Crafted with ❤️</p>
+            <div class="flex gap-6">
+                <a href="#home" class="text-xs text-slate-500 hover:text-gold-400 transition-colors">Home</a>
+                <a href="#menu" class="text-xs text-slate-500 hover:text-gold-400 transition-colors">Menu</a>
+                <a href="#booking" class="text-xs text-slate-500 hover:text-gold-400 transition-colors">Book</a>
+                <!-- Secret admin link - tell only the owner -->
+                <a href="#admin" onclick="showAdminLogin(event)" class="text-xs text-slate-700 hover:text-slate-500 transition-colors cursor-pointer">·</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ==================== ADMIN PANEL MODAL ==================== -->
+<div id="adminModal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4" style="background:rgba(2,6,23,0.95);backdrop-filter:blur(20px)">
+    <div class="w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl border border-white/10 bg-navy-900 shadow-2xl">
+        <!-- Admin Header -->
+        <div class="flex items-center justify-between p-6 border-b border-white/5">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center"><i data-lucide="shield-check" class="w-5 h-5 text-red-400"></i></div>
+                <div>
+                    <h3 class="text-white font-bold text-lg">Admin Panel</h3>
+                    <p class="text-slate-500 text-xs">Only authorized owner can access</p>
+                </div>
+            </div>
+            <button onclick="closeAdmin()" class="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center hover:border-red-400/40 transition-colors">
+                <i data-lucide="x" class="w-5 h-5 text-white"></i>
+            </button>
+        </div>
+
+        <!-- Login Form (shown when not logged in) -->
+        <div id="adminLogin" class="p-8">
+            <div class="max-w-sm mx-auto text-center">
+                <div class="w-20 h-20 rounded-full bg-navy-800 flex items-center justify-center mx-auto mb-6 border border-white/5">
+                    <i data-lucide="lock" class="w-8 h-8 text-gold-400"></i>
+                </div>
+                <h4 class="text-white font-bold text-xl mb-2">Owner Login</h4>
+                <p class="text-slate-500 text-sm mb-6">Enter your admin password to view bookings</p>
+                <form onsubmit="adminLoginHandler(event)">
+                    <input type="password" id="adminPassword" required placeholder="Enter password" class="form-input w-full px-4 py-3.5 rounded-xl text-sm mb-4 text-center text-lg tracking-widest">
+                    <p id="adminError" class="text-red-400 text-xs mb-4 hidden">Wrong password. Try again.</p>
+                    <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-gold-500 to-gold-600 text-navy-950 font-bold rounded-xl hover:shadow-lg hover:shadow-gold-500/25 transition-all">
+                        Unlock Bookings
+                    </button>
+                </form>
+                <p class="text-slate-600 text-[10px] mt-6">Default password: welela2025 (change in code)</p>
+            </div>
+        </div>
+
+        <!-- Bookings Dashboard (shown after login) -->
+        <div id="adminDashboard" class="hidden">
+            <div class="p-6 border-b border-white/5 flex items-center justify-between">
+                <div>
+                    <p class="text-slate-400 text-sm">Total Bookings</p>
+                    <p class="text-3xl font-bold text-white" id="totalBookings">0</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="exportCSV()" class="px-4 py-2 rounded-xl border border-white/10 text-sm text-slate-300 hover:border-gold-400/40 hover:text-gold-400 transition-all flex items-center gap-2">
+                        <i data-lucide="download" class="w-4 h-4"></i> Export CSV
+                    </button>
+                    <button onclick="clearAllBookings()" class="px-4 py-2 rounded-xl border border-red-500/20 text-sm text-red-400 hover:bg-red-500/10 transition-all flex items-center gap-2">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i> Clear All
+                    </button>
+                </div>
+            </div>
+            <div class="p-6" id="bookingsList">
+                <p class="text-slate-500 text-center py-12">Loading bookings...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+// ============================================================
+// ⚙️ CONFIGURATION — CHANGE THESE TO YOUR REAL VALUES
+// ============================================================
+const CONFIG = {
+    // ===== ADMIN PASSWORD (CHANGE THIS!) =====
+    ADMIN_PASSWORD: 'welela2025',
+
+    // ===== REAL PHONE NUMBER =====
+    PHONE: '+254 7XX XXX XXX',
+
+    // ===== REAL ADDRESS =====
+    ADDRESS: 'Welela Kitchen, Main Street, Near Town Center',
+
+    // ===== GOOGLE SHEETS WEB APP URL (see setup guide below) =====
+    GOOGLE_SHEET_URL: '',
+
+    // ===== YOUR PHOTOS — Replace these with your actual image paths =====
+    // Put photos in an "images" folder in your GitHub repo
+    // Example: 'images/hero.jpg' or use full URLs
+    PHOTOS: {
+        hero: 'https://picsum.photos/seed/welela-kitchen-chef/1920/1080.jpg',
+        kitchenMain: 'https://picsum.photos/seed/welela-chef-cooking/800/600.jpg',
+        spices: 'https://picsum.photos/seed/welela-spices-prep/400/300.jpg',
+        plating: 'https://picsum.photos/seed/welela-plating-food/400/300.jpg',
+        exterior: 'https://picsum.photos/seed/welela-kitchen-exterior/800/600.jpg',
+        gallery: [
+            'https://picsum.photos/seed/welela-biryani/600/600.jpg',
+            'https://picsum.photos/seed/welela-kebab/300/300.jpg',
+            'https://picsum.photos/seed/welela-naan/300/300.jpg',
+            'https://picsum.photos/seed/welela-curry-dish/300/300.jpg',
+            'https://picsum.photos/seed/welela-dessert-sweet/300/300.jpg',
+            'https://picsum.photos/seed/welela-catering-event/600/300.jpg',
+            'https://picsum.photos/seed/welela-drinks-juice/300/300.jpg',
+            'https://picsum.photos/seed/welela-salad-fresh/300/300.jpg',
+        ],
+        menu: {
+            below200: [
+                'https://picsum.photos/seed/welela-family-meal/400/300.jpg',
+                'https://picsum.photos/seed/welela-starter-box/400/300.jpg',
+                'https://picsum.photos/seed/welela-mini-catering/400/300.jpg',
+                'https://picsum.photos/seed/welela-office-lunch/400/300.jpg',
+                'https://picsum.photos/seed/welela-kids-party/400/300.jpg',
+                'https://picsum.photos/seed/welela-date-night/400/300.jpg',
+            ],
+            mid200: [
+                'https://picsum.photos/seed/welela-birthday-bash/400/300.jpg',
+                'https://picsum.photos/seed/welela-corporate-lunch/400/300.jpg',
+                'https://picsum.photos/seed/welela-engagement/400/300.jpg',
+                'https://picsum.photos/seed/welela-bbq-feast/400/300.jpg',
+                'https://picsum.photos/seed/welela-cultural-food/400/300.jpg',
+                'https://picsum.photos/seed/welela-anniversary/400/300.jpg',
+            ],
+            above1000: [
+                'https://picsum.photos/seed/welela-wedding-premium/400/300.jpg',
+                'https://picsum.photos/seed/welela-royal-feast/400/300.jpg',
+                'https://picsum.photos/seed/welela-mega-event/400/300.jpg',
+                'https://picsum.photos/seed/welela-vip-gala/400/300.jpg',
+                'https://picsum.photos/seed/welela-destination/400/300.jpg',
+                'https://picsum.photos/seed/welela-custom-premium/400/300.jpg',
+            ]
+        }
+    }
+};
+
+// ============================================================
+// 🖼️ APPLY PHOTOS FROM CONFIG
+// ============================================================
+function applyPhotos() {
+    document.querySelector('.hero-kitchen').style.backgroundImage =
+        `linear-gradient(to bottom, rgba(2,6,23,0.3) 0%, rgba(2,6,23,0.6) 50%, rgba(2,6,23,0.95) 100%), url('${CONFIG.PHOTOS.hero}')`;
+
+    const kitchenMain = document.querySelector('#kitchenMainImg img');
+    if (kitchenMain) kitchenMain.src = CONFIG.PHOTOS.kitchenMain;
+
+    const spices = document.querySelector('#kitchenSmall1 img');
+    if (spices) spices.src = CONFIG.PHOTOS.spices;
+
+    const plating = document.querySelector('#kitchenSmall2 img');
+    if (plating) plating.src = CONFIG.PHOTOS.plating;
+
+    const exterior = document.querySelector('#exteriorImg img');
+    if (exterior) exterior.src = CONFIG.PHOTOS.exterior;
+}
+
+// ============================================================
+// 📞 APPLY REAL PHONE & ADDRESS
+// ============================================================
+function applyContactInfo() {
+    document.getElementById('realPhone').textContent = CONFIG.PHONE;
+    document.getElementById('realAddress').textContent = CONFIG.ADDRESS;
+
+    // WhatsApp link
+    const cleanPhone = CONFIG.PHONE.replace(/[^0-9]/g, '');
+    document.getElementById('whatsappLink').href = `https://wa.me/${cleanPhone}`;
+
+    // Update phone placeholder in form
+    const phoneInput = document.getElementById('bPhone');
+    if (phoneInput) phoneInput.placeholder = CONFIG.PHONE;
+}
+
+// ============================================================
+// 🌐 LANGUAGE TOGGLE (English / Amharic)
+// ============================================================
+let currentLang = 'en';
+
+function toggleLanguage() {
+    currentLang = currentLang === 'en' ? 'am' : 'en';
+    document.querySelectorAll('[data-am]').forEach(el => {
+        if (currentLang === 'am') {
+            el.innerHTML = el.getAttribute('data-am');
+        } else {
+            // Restore original English — stored in data-en
+            if (el.getAttribute('data-en')) {
+                el.innerHTML = el.getAttribute('data-en');
+            }
+        }
+    });
+    document.getElementById('langLabel').textContent = currentLang === 'en' ? 'አማ' : 'EN';
+    document.getElementById('langLabelMobile').textContent = currentLang === 'en' ? 'አማ' : 'EN';
+}
+
+// Store original English text on load
+function storeEnglishTexts() {
+    document.querySelectorAll('[data-am]').forEach(el => {
+        el.setAttribute('data-en', el.innerHTML);
+    });
+}
+
+// ============================================================
+// 🍽️ MENU DATA & RENDERING
+// ============================================================
+const menuData = {
+    below200: [
+        { name: "Family Meal Pack", nameAm: "የቤተሰብ ምግብ", desc: "Rice, 2 curries, naan, salad — feeds 6-8 people", descAm: "ሩዝ፣ 2 ስጋ፣ ናን፣ ሰላት — 6-8 ሰዎች", price: "$80", tag: "POPULAR", tagAm: "ተወዳጅ" },
+        { name: "Party Starter Box", nameAm: "የፓርቲ ጀማሪ", desc: "Samosas, kebabs, spring rolls, dips for 15 people", descAm: "ሳሞሳ፣ ከባድ፣ ስፕሪንግ ሮል፣ 15 ሰዎች", price: "$120", tag: "BEST VALUE", tagAm: "በጣም ጥሩ" },
+        { name: "Mini Catering Bundle", nameAm: "ትንሽ ማቅረብ", desc: "One main dish, rice, drinks for 20 guests", descAm: "አንድ ዋና ምግብ፣ ሩዝ፣ መጠጥ 20 እንግዲዎች", price: "$180", tag: "", tagAm: "" },
+        { name: "Office Lunch Deal", nameAm: "የቢሮ ምሳ", desc: "Complete lunch for 10 people with dessert", descAm: "ሙሉ ምሳ 10 ሰዎች ከዱስስርት ጋር", price: "$150", tag: "", tagAm: "" },
+        { name: "Kids Party Pack", nameAm: "የልጆች ፓርቲ", desc: "Fun finger foods, juice, mini cakes for 15 kids", descAm: "ለልጆች ምግብ፣ ጁስ፣ ማልሪ ኬክ 15 ልጆች", price: "$100", tag: "FUN", tagAm: "አስቂኝ" },
+        { name: "Date Night Special", nameAm: "የቀን ልምምድ", desc: "3-course meal for 2 with candle setup", descAm: "3 ዓይነት ምግብ 2 ሰዎች ከመብራት ጋር", price: "$60", tag: "ROMANTIC", tagAm: "ፍቅር" },
+    ],
+    mid200: [
+        { name: "Birthday Bash Package", nameAm: "የልደት ፓርቲ", desc: "Full menu for 50 guests with decor setup", descAm: "ሙሉ ዝርዝር 50 እንግዲዎች ከቅብጥ ጋር", price: "$450", tag: "POPULAR", tagAm: "ተወዳጅ" },
+        { name: "Corporate Lunch", nameAm: "የኩባንያ ምሳ", desc: "Premium 3-course meal for 30 executives", descAm: "ከፍተኛ 3 ዓይነት ምግብ 30 አመራሮች", price: "$600", tag: "PREMIUM", tagAm: "ከፍተኛ" },
+        { name: "Engagement Party", nameAm: "የምሽት ፓርቲ", desc: "Starter, main, dessert, drinks for 80 guests", descAm: "ጀማሪ፣ ዋና፣ ዱስስርት፣ መጠጥ 80 እንግዲዎች", price: "$800", tag: "", tagAm: "" },
+        { name: "Weekend BBQ Feast", nameAm: "የወሩ ምሳ", desc: "Grilled meats, sides, drinks for 60 people", descAm: "የተቀመመ ስጋ፣ ተጨማሪ፣ መጠጥ 60 ሰዎች", price: "$550", tag: "NEW", tagAm: "አዲስ" },
+        { name: "Cultural Event Menu", nameAm: "የባህል ምግብ", desc: "Traditional dishes for 100 guests", descAm: "ባህላዊ ምግቦች 100 እንግዲዎች", price: "$900", tag: "", tagAm: "" },
+        { name: "Anniversary Dinner", nameAm: "ዓመት ድርሻ ምሳ", desc: "Elegant 5-course dinner for 40 guests", descAm: "አስቂኝ 5 ዓይነት ምሳ 40 እንግዲዎች", price: "$700", tag: "ELEGANT", tagAm: "ያማረ" },
+    ],
+    above1000: [
+        { name: "Wedding Premium Package", nameAm: "የሰርግ ከፍተኛ", desc: "Full-service catering for 200+ guests, 8 dishes", descAm: "ሙሉ አገልግሎት 200+ እንግዲዎች 8 ዓይነት", price: "$2,500", tag: "LUXURY", tagAm: "ሱቅ" },
+        { name: "Royal Feast", nameAm: "ንጉሠ ኛ ምሳ", desc: "12-course grand meal for 300 guests with live stations", descAm: "12 ዓይነት ትልቅ ምሳ 300 እንግዲዎች", price: "$4,000", tag: "EXCLUSIVE", tagAm: "ልዩ" },
+        { name: "Mega Event Package", nameAm: "ትልቅ ዝግጅት", desc: "500+ guests, full decor, waiters, everything", descAm: "500+ እንግዲዎች፣ ሙሉ ቅብጥ፣ የስራ ሰዎች", price: "$6,500", tag: "GRAND", tagAm: "ትልቅ" },
+        { name: "VIP Corporate Gala", nameAm: "VIP ኩባንያ", desc: "Black-tie dinner for 150 with premium service", descAm: "ከፍተኛ ምሳ 150 ከተሻለ አገልግሎት ጋር", price: "$3,000", tag: "PREMIUM", tagAm: "ከፍተኛ" },
+        { name: "Destination Wedding Pack", nameAm: "የሰርግ ጉዞ", desc: "Full catering + travel setup for out-of-town events", descAm: "ሙሉ ማቅረብ + ጉዞ ዝግጅት", price: "$5,000", tag: "NEW", tagAm: "አዲስ" },
+        { name: "Custom Premium", nameAm: "ልዩ ቅድሚያ", desc: "Tell us your dream — we'll make it happen", descAm: "ህልሙን ይንገሩን — እንደምትሻል እናደርግ", price: "Custom", tag: "BESPOKE", tagAm: "ልዩ" },
+    ]
+};
+
+let currentTab = 'below200';
+
+function switchTab(tab) {
+    currentTab = tab;
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active-tab'));
+    document.getElementById('tab-' + tab).classList.add('active-tab');
+    renderMenu();
+}
+
+function renderMenu() {
+    const container = document.getElementById('menuContainer');
+    const items = menuData[currentTab];
+    const photos = CONFIG.PHOTOS.menu[currentTab];
+    const isAm = currentLang === 'am';
+
+    container.innerHTML = items.map((item, i) => `
+        <div class="menu-card rounded-3xl bg-navy-800/30 backdrop-blur-sm overflow-hidden group" style="animation:fadeInUp 0.5s ${i * 80}ms both">
+            <div class="relative h-48 overflow-hidden">
+                <img src="${photos[i]}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-navy-800/60 to-transparent"></div>
+                ${item.tag ? `<span class="price-badge absolute top-3 right-3 px-3 py-1 rounded-full bg-gold-500 text-navy-950 text-[10px] font-bold tracking-wide">${isAm && item.tagAm ? item.tagAm : item.tag}</span>` : ''}
+            </div>
+            <div class="p-6">
+                <div class="flex items-start justify-between gap-3 mb-2">
+                    <h3 class="text-white font-bold text-base">${isAm && item.nameAm ? item.nameAm : item.name}</h3>
+                    <span class="text-gold-400 font-extrabold text-lg whitespace-nowrap">${item.price}</span>
+                </div>
+                <p class="text-slate-400 text-sm leading-relaxed mb-5">${isAm && item.descAm ? item.descAm : item.desc}</p>
+                <a href="#booking" class="inline-flex items-center gap-2 text-sm font-semibold text-gold-400 hover:text-gold-300 transition-colors group/link">
+                    ${isAm ? 'ይያዙ' : 'Book This'}
+                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover/link:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    `).join('');
+    lucide.createIcons();
+}
+
+// ============================================================
+// 🖼️ GALLERY
+// ============================================================
+function renderGallery() {
+    const grid = document.getElementById('galleryGrid');
+    const photos = CONFIG.PHOTOS.gallery;
+    const isAm = currentLang === 'am';
+    const captions = [
+        isAm ? 'ልዩ ብርይኒ' : 'Special Biryani',
+        isAm ? 'ሲክ ከባድ' : 'Seekh Kebabs',
+        isAm ? 'ታንዶሪ ናን' : 'Tandoori Naan',
+        isAm ? 'ጠቃሚ ስጋ' : 'Rich Curry',
+        isAm ? 'ዱስስርት' : 'Desserts',
+        isAm ? 'የዝግጅት ማቅረብ' : 'Event Catering Setup',
+        isAm ? 'አዲስ መጠጥ' : 'Fresh Drinks',
+        isAm ? 'አዲስ ሰላት' : 'Fresh Salads',
+    ];
+    const sizes = ['col-span-2 row-span-2 min-h-[250px]','','','','','col-span-2','',''];
+
+    grid.innerHTML = photos.map((p, i) => `
+        <div class="reveal gallery-item ${sizes[i]} relative group" style="transition-delay:${i * 60}ms">
+            <img src="${p}" alt="Gallery ${i+1}" class="w-full h-40 md:h-48 object-cover ${sizes[i] ? 'min-h-[250px] md:h-full' : ''}">
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <p class="absolute ${sizes[i] ? 'bottom-4 left-4 text-white font-bold' : 'bottom-3 left-3 text-white text-sm font-semibold'} opacity-0 group-hover:opacity-100 transition-opacity duration-300">${captions[i]}</p>
+        </div>
+    `).join('');
+
+    // Re-observe new reveal elements
+    document.querySelectorAll('#galleryGrid .reveal').forEach(el => observer.observe(el));
+}
+
+// ============================================================
+// 📋 BOOKING FORM — Saves to localStorage + Google Sheets
+// ============================================================
+function handleBooking(e) {
+    e.preventDefault();
+
+    const booking = {
+        id: Date.now(),
+        timestamp: new Date().toLocaleString(),
+        name: document.getElementById('bName').value,
+        phone: document.getElementById('bPhone').value,
+        email: document.getElementById('bEmail').value,
+        event: document.getElementById('bEvent').value,
+        date: document.getElementById('bDate').value,
+        guests: document.getElementById('bGuests').value,
+        budget: document.getElementById('bBudget').value,
+        location: document.getElementById('bLocation').value,
+        notes: document.getElementById('bNotes').value,
+        status: 'New'
+    };
+
+    // Save to localStorage
+    let bookings = JSON.parse(localStorage.getItem('welela_bookings') || '[]');
+    bookings.unshift(booking);
+    localStorage.setItem('welela_bookings', JSON.stringify(bookings));
+
+    // Send to Google Sheets (if configured)
+    sendToGoogleSheet(booking);
+
+    // Show success
+    showToast(
+        currentLang === 'am' ? 'ተሳክቷል! ✅' : 'Booking Submitted! ✅',
+        currentLang === 'am' ? 'በ2 ሰዓት ውስጥ እንገናኝዎታለን' : 'We\'ll contact you within 2 hours to confirm.'
+    );
+
+    e.target.reset();
+}
+
+async function sendToGoogleSheet(booking) {
+    if (!CONFIG.GOOGLE_SHEET_URL) return;
+
+    try {
+        const formBody = Object.entries(booking).map(([k, v]) =>
+            encodeURIComponent(k) + '=' + encodeURIComponent(v)
+        ).join('&');
+
+        await fetch(CONFIG.GOOGLE_SHEET_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: formBody,
+            mode: 'no-cors'
+        });
+    } catch (err) {
+        console.log('Sheet log failed:', err);
+    }
+}
+
+// ============================================================
+// 🔐 ADMIN PANEL
+// ============================================================
+let isAdminLoggedIn = false;
+
+function showAdminLogin(e) {
+    e.preventDefault();
+    const modal = document.getElementById('adminModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    if (isAdminLoggedIn) {
+        document.getElementById('adminLogin').classList.add('hidden');
+        document.getElementById('adminDashboard').classList.remove('hidden');
+        renderBookings();
+    }
+}
+
+function closeAdmin() {
+    const modal = document.getElementById('adminModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+function adminLoginHandler(e) {
+    e.preventDefault();
+    const pw = document.getElementById('adminPassword').value;
+    if (pw === CONFIG.ADMIN_PASSWORD) {
+        isAdminLoggedIn = true;
+        document.getElementById('adminLogin').classList.add('hidden');
+        document.getElementById('adminDashboard').classList.remove('hidden');
+        document.getElementById('adminError').classList.add('hidden');
+        renderBookings();
+    } else {
+        document.getElementById('adminError').classList.remove('hidden');
+    }
+}
+
+function renderBookings() {
+    const bookings = JSON.parse(localStorage.getItem('welela_bookings') || '[]');
+    document.getElementById('totalBookings').textContent = bookings.length;
+
+    if (bookings.length === 0) {
+        document.getElementById('bookingsList').innerHTML = `
+            <div class="text-center py-16">
+                <i data-lucide="inbox" class="w-16 h-16 text-slate-700 mx-auto mb-4"></i>
+                <p class="text-slate-500">No bookings yet</p>
+            </div>`;
+        lucide.createIcons();
+        return;
+    }
+
+    document.getElementById('bookingsList').innerHTML = bookings.map((b, i) => `
+        <div class="mb-4 p-5 rounded-2xl border border-white/5 bg-navy-800/30 hover:border-gold-500/20 transition-colors">
+            <div class="flex items-start justify-between mb-3">
+                <div>
+                    <p class="text-white font-bold text-base">${b.name}</p>
+                    <p class="text-slate-500 text-xs">${b.timestamp}</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <select onchange="updateStatus(${b.id}, this.value)" class="text-xs px-2 py-1 rounded-lg ${b.status === 'New' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : b.status === 'Confirmed' ? 'bg-green-500/10 text-green-400 border-green-500/20' : b.status === 'Completed' ? 'bg-slate-500/10 text-slate-400 border-slate-500/20' : 'bg-red-500/10 text-red-400 border-red-500/20'} border">
+                        <option value="New" ${b.status === 'New' ? 'selected' : ''}>New</option>
+                        <option value="Confirmed" ${b.status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
+                        <option value="Completed" ${b.status === 'Completed' ? 'selected' : ''}>Completed</option>
+                        <option value="Cancelled" ${b.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                    </select>
+                    <button onclick="deleteBooking(${b.id})" class="w-8 h-8 rounded-lg border border-red-500/20 flex items-center justify-center text-red-400 hover:bg-red-500/10 transition-colors">
+                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                <div><span class="text-slate-500 text-xs block">Phone</span><span class="text-slate-300">${b.phone}</span></div>
+                <div><span class="text-slate-500 text-xs block">Event</span><span class="text-slate-300 capitalize">${b.event}</span></div>
+                <div><span class="text-slate-500 text-xs block">Date</span><span class="text-slate-300">${b.date}</span></div>
+                <div><span class="text-slate-500 text-xs block">Guests</span><span class="text-slate-300">${b.guests}</span></div>
+                <div><span class="text-slate-500 text-xs block">Budget</span><span class="text-gold-400 font-semibold">${b.budget}</span></div>
+                <div><span class="text-slate-500 text-xs block">Location</span><span class="text-slate-300">${b.location || '-'}</span></div>
+                <div class="col-span-2"><span class="text-slate-500 text-xs block">Notes</span><span class="text-slate-300">${b.notes || '-'}</span></div>
+            </div>
+        </div>
+    `).join('');
+
+    lucide.createIcons();
+}
+
+function updateStatus(id, status) {
+    let bookings = JSON.parse(localStorage.getItem('welela_bookings') || '[]');
+    bookings = bookings.map(b => b.id === id ? { ...b, status } : b);
+    localStorage.setItem('welela_bookings', JSON.stringify(bookings));
+    renderBookings();
+}
+
+function deleteBooking(id) {
+    let bookings = JSON.parse(localStorage.getItem('welela_bookings') || '[]');
+    bookings = bookings.filter(b => b.id !== id);
+    localStorage.setItem('welela_bookings', JSON.stringify(bookings));
+    renderBookings();
+}
+
+function clearAllBookings() {
+    if (confirm('Delete ALL bookings? This cannot be undone.')) {
+        localStorage.removeItem('welela_bookings');
+        renderBookings();
+    }
+}
+
+function exportCSV() {
+    const bookings = JSON.parse(localStorage.getItem('welela_bookings') || '[]');
+    if (bookings.length === 0) { alert('No bookings to export'); return; }
+
+    const headers = ['Timestamp','Name','Phone','Email','Event','Date','Guests','Budget','Location','Notes','Status'];
+    const rows = bookings.map(b => [b.timestamp, b.name, b.phone, b.email, b.event, b.date, b.guests, b.budget, b.location, b.notes, b.status].map(v => `"${(v||'').replace(/"/g,'""')}"`).join(','));
+
+    const csv = [headers.join(','), ...rows].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `welela-bookings-${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+// ============================================================
+// 🔔 TOAST
+// ============================================================
+function showToast(title, msg) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toast-title').textContent = title;
+    document.getElementById('toast-msg').textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 5000);
+}
+
+// ============================================================
+// 📱 NAVBAR & MOBILE MENU
+// ============================================================
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(2,6,23,0.9)';
+        navbar.style.backdropFilter = 'blur(20px)';
+        navbar.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+    } else {
+        navbar.style.background = 'transparent';
+        navbar.style.backdropFilter = 'none';
+        navbar.style.borderBottom = 'none';
+    }
+});
+
+const mobileMenu = document.getElementById('mobileMenu');
+document.getElementById('menuToggle').addEventListener('click', () => mobileMenu.classList.add('open'));
+document.getElementById('menuClose').addEventListener('click', () => mobileMenu.classList.remove('open'));
+document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+});
+
+// ============================================================
+// 👁️ SCROLL REVEAL
+// ============================================================
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ============================================================
+// ✨ PARTICLES
+// ============================================================
+function createParticles() {
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 20; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (8 + Math.random() * 12) + 's';
+        p.style.animationDelay = Math.random() * 10 + 's';
+        const size = (2 + Math.random() * 4) + 'px';
+        p.style.width = size;
+        p.style.height = size;
+        container.appendChild(p);
+    }
+}
+
+// ============================================================
+// 🚀 INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+    lucide.createIcons();
+    storeEnglishTexts();
+    applyPhotos();
+    applyContactInfo();
+    renderMenu();
+    renderGallery();
+    createParticles();
+});
+</script>
+</body>
+</html>
