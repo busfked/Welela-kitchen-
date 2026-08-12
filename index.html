@@ -3,345 +3,938 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welela Kitchen - Catering & Restaurant</title>
+    <title>Welela Kitchen & Catering Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { inter: ['Inter', 'sans-serif'] },
+                    colors: {
+                        navy: {
+                            950: '#020617',
+                            900: '#0a0f1e',
+                            850: '#0d1428',
+                            800: '#111a33',
+                            700: '#1a2744',
+                            600: '#243656',
+                            500: '#2d4570',
+                        },
+                        gold: {
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --primary-orange: #ff7e5f;
-            --secondary-gold: #feb47b;
-            --dark-blue: #1e272e;
-            --bg-gray: #f5f7fa;
-            --text-color: #2d3436;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #020617; color: #e2e8f0; overflow-x: hidden; }
+
+        /* Blue Texture Background */
+        .blue-texture {
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(30, 58, 138, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(30, 64, 175, 0.1) 0%, transparent 50%),
+                linear-gradient(180deg, #020617 0%, #0a0f1e 50%, #020617 100%);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        .blue-texture-strong {
+            background: 
+                radial-gradient(ellipse at 30% 40%, rgba(37, 99, 235, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 60%, rgba(29, 78, 216, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.1) 0%, transparent 70%),
+                linear-gradient(135deg, #0a0f1e 0%, #111a33 50%, #0a0f1e 100%);
         }
 
-        body {
-            background-color: var(--bg-gray);
-            color: var(--text-color);
-            padding-bottom: 60px;
+        /* Noise texture overlay */
+        .noise-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
         }
 
-        /* Top Navigation Header bar */
-        .top-navbar {
-            background: #ffffff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        /* Reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .brand-logo {
-            font-size: 1.3rem;
-            font-weight: 800;
-            background: linear-gradient(to right, var(--primary-orange), var(--secondary-gold));
+        /* Hero parallax image */
+        .hero-kitchen {
+            background: 
+                linear-gradient(to bottom, rgba(2,6,23,0.3) 0%, rgba(2,6,23,0.6) 50%, rgba(2,6,23,0.95) 100%),
+                url('https://picsum.photos/seed/welela-kitchen-chef/1920/1080.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Shimmer */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .gold-shimmer {
+            background: linear-gradient(90deg, #f59e0b 0%, #fcd34d 25%, #f59e0b 50%, #fcd34d 75%, #f59e0b 100%);
+            background-size: 200% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: shimmer 4s linear infinite;
         }
 
-        .menu-container {
+        /* Floating particles */
+        @keyframes float-up {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(251, 191, 36, 0.3);
+            border-radius: 50%;
+            animation: float-up linear infinite;
+        }
+
+        /* Steam effect */
+        @keyframes steam {
+            0% { transform: translateY(0) scaleX(1); opacity: 0.4; }
+            50% { transform: translateY(-40px) scaleX(1.5); opacity: 0.2; }
+            100% { transform: translateY(-80px) scaleX(2); opacity: 0; }
+        }
+        .steam-line {
+            position: absolute;
+            width: 2px;
+            height: 30px;
+            background: linear-gradient(to top, rgba(255,255,255,0.15), transparent);
+            border-radius: 50%;
+            animation: steam 2.5s ease-out infinite;
+        }
+
+        /* Card hover glow */
+        .menu-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+        .menu-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(251, 191, 36, 0.3);
+            box-shadow: 0 20px 60px -15px rgba(251, 191, 36, 0.15), 0 0 40px -10px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Price badge pulse */
+        @keyframes badge-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(251, 191, 36, 0); }
+        }
+        .price-badge { animation: badge-pulse 2.5s ease-in-out infinite; }
+
+        /* Gallery grid */
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid rgba(59, 130, 246, 0.08);
+        }
+        .gallery-item img {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Tab button */
+        .tab-btn {
+            transition: all 0.3s ease;
             position: relative;
         }
-
-        /* 3-Dot Interactive Trigger Button */
-        .dots-btn {
-            background: none;
-            border: 1.5px solid var(--dark-blue);
-            border-radius: 6px;
-            font-size: 1.4rem;
-            cursor: pointer;
-            padding: 2px 12px;
-            color: var(--dark-blue);
-            font-weight: bold;
+        .tab-btn.active-tab {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.05));
+            border-color: rgba(251, 191, 36, 0.5);
+            color: #fbbf24;
         }
-
-        /* Dropdown Window Container Box */
-        .dropdown-menu {
-            display: none;
+        .tab-btn.active-tab::after {
+            content: '';
             position: absolute;
-            right: 0;
-            top: 45px;
-            background: white;
-            min-width: 200px;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.15);
-            border-radius: 8px;
-            overflow: hidden;
-            z-index: 2000;
+            bottom: -1px;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background: #fbbf24;
+            border-radius: 2px;
         }
 
-        .dropdown-menu a {
-            display: block;
-            padding: 14px 16px;
-            color: var(--dark-blue);
-            text-decoration: none;
-            font-size: 1rem;
-            border-bottom: 1px solid #f5f5f5;
-        }
+        /* Smooth scroll */
+        html { scroll-behavior: smooth; }
 
-        .dropdown-menu a:active {
-            background-color: #fcf1ed;
-        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e3a8a; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
 
-        /* Toggled class via JavaScript pipeline */
-        .show-menu {
-            display: block !important;
-        }
-
-        /* Cover Hero Graphic Area */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url("data:image/svg+xml,%3Csvg xmlns='http://w3.org' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 0h100v100H0z' fill='%232c3e50'/%3E%3Cpath d='M10 20h80v1H10zm0 20h80v1H10zm0 20h80v1H10zm0 20h80v1H10z' fill='%2334495e' opacity='0.3'/%3E%3C/svg%3E");
-            height: 140px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .hero h1 {
-            font-size: 1.8rem;
-            font-weight: 800;
-        }
-
-        .hero p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            margin-top: 5px;
-        }
-
-        .main-content {
-            padding: 15px;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* Profile Layout Cards */
-        .fancy-card {
-            background: #ffffff;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            margin-bottom: 25px;
-        }
-
-        /* Injected CSS Background Graphic Banners */
-        .card-img-banner {
-            width: 100%;
-            height: 140px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-        }
-
-        .restaurant-bg {
-            background-image: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%);
-        }
-
-        .catering-bg {
-            background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        .fancy-card h2 {
-            font-size: 1.3rem;
-            color: var(--dark-blue);
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .info-row {
-            display: flex;
-            margin-bottom: 14px;
-            font-size: 0.95rem;
-        }
-
-        .info-icon {
-            font-size: 1.2rem;
-            margin-right: 12px;
-        }
-
-        .info-txt strong {
-            color: #000;
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        /* Secure Flat Interactive Input Field Forms */
-        .form-label {
-            display: block;
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-top: 14px;
-            margin-bottom: 6px;
-            color: #485460;
-        }
-
+        /* Booking form inputs */
         .form-input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1.5px solid #dcdde1;
-            border-radius: 10px;
-            font-size: 1rem;
-            background: #fff;
-            outline: none;
+            background: rgba(17, 26, 51, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            color: #e2e8f0;
+            transition: all 0.3s ease;
         }
-
         .form-input:focus {
-            border-color: var(--primary-orange);
+            outline: none;
+            border-color: rgba(251, 191, 36, 0.5);
+            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
+        }
+        .form-input::placeholder { color: #475569; }
+
+        /* Toast notification */
+        .toast {
+            transform: translateX(120%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .toast.show { transform: translateX(0); }
+
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mobile-menu.open { transform: translateX(0); }
+
+        /* Inside kitchen section */
+        .kitchen-peek {
+            background: 
+                linear-gradient(135deg, rgba(2,6,23,0.85) 0%, rgba(2,6,23,0.4) 50%, rgba(2,6,23,0.85) 100%),
+                url('https://picsum.photos/seed/welela-cooking-fire/1920/800.jpg');
+            background-size: cover;
+            background-position: center;
         }
 
-        .primary-submit-btn {
-            width: 100%;
-            background: linear-gradient(to right, var(--primary-orange), var(--secondary-gold));
-            color: white;
-            border: none;
-            padding: 14px;
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-top: 24px;
-        }
-
-        /* Ticket Modal Popup Layer Components */
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 5000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .popup-box {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .success-badge {
-            width: 60px;
-            height: 60px;
-            background: #10ac84;
-            color: white;
+        /* Glow orb */
+        .glow-orb {
+            position: absolute;
             border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .receipt-ticket {
-            background: #f8f9fa;
-            border-left: 4px solid var(--primary-orange);
-            padding: 14px;
-            border-radius: 6px;
-            text-align: left;
-            font-size: 0.95rem;
-            margin: 15px 0;
-            line-height: 1.6;
-        }
-
-        .tg-redirect-btn {
-            display: block;
-            background: #2481cc;
-            color: white;
-            text-decoration: none;
-            padding: 12px;
-            font-weight: 700;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .close-link {
-            font-size: 0.9rem;
-            color: #778ca3;
-            text-decoration: underline;
-            cursor: pointer;
+            filter: blur(100px);
+            pointer-events: none;
         }
     </style>
 </head>
-<body>
+<body class="blue-texture noise-overlay relative">
 
-    <!-- Top Sticky Bar Navigation -->
-    <div class="top-navbar">
-        <div class="brand-logo">Welela Kitchen</div>
-        <div class="menu-container">
-            <button class="dots-btn" id="menuToggleBtn">⋮</button>
-            <div class="dropdown-menu" id="dropdownMenuWindow">
-                <a href="#services-section">Our Services</a>
-                <a href="#services-section">Gerji Address</a>
-                <a href="#booking-section">Book Catering</a>
+    <!-- Floating Particles -->
+    <div id="particles" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast fixed top-6 right-6 z-[100] bg-navy-700 border border-gold-500/30 rounded-2xl px-6 py-4 shadow-2xl flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+        </div>
+        <div>
+            <p class="text-sm font-semibold text-white" id="toast-title">Success!</p>
+            <p class="text-xs text-slate-400" id="toast-msg">Your booking has been submitted.</p>
+        </div>
+    </div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center shadow-lg shadow-gold-500/20 group-hover:shadow-gold-500/40 transition-shadow">
+                        <i data-lucide="chef-hat" class="w-5 h-5 text-navy-950"></i>
+                    </div>
+                    <div>
+                        <span class="text-lg font-bold text-white tracking-tight">Welela</span>
+                        <span class="text-[10px] block -mt-1 text-gold-400 font-medium tracking-widest uppercase">Kitchen & Catering</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Links -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="text-sm text-slate-400 hover:text-gold-400 transition-colors">Home</a>
+                    <a href="#inside" class="text-sm text-slate-400 hover:text-gold-400 transition-colors">Inside Kitchen</a>
+                    <a href="#menu" class="text-sm text-slate-400 hover:text-gold-400 transition-colors">Menu</a>
+                    <a href="#gallery" class="text-sm text-slate-400 hover:text-gold-400 transition-colors">Gallery</a>
+                    <a href="#booking" class="ml-2 px-5 py-2.5 bg-gradient-to-r from-gold-500 to-gold-600 text-navy-950 text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-gold-500/25 hover:-translate-y-0.5 transition-all">
+                        Book Now
+                    </a>
+                </div>
+
+                <!-- Mobile Hamburger -->
+                <button id="menuToggle" class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl border border-white/10 hover:border-gold-400/30 transition-colors">
+                    <i data-lucide="menu" class="w-5 h-5 text-white"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[60] bg-navy-950/98 backdrop-blur-xl">
+        <div class="flex flex-col h-full px-8 pt-8">
+            <div class="flex justify-between items-center mb-16">
+                <span class="text-xl font-bold text-white">Welela</span>
+                <button id="menuClose" class="w-10 h-10 flex items-center justify-center rounded-xl border border-white/10">
+                    <i data-lucide="x" class="w-5 h-5 text-white"></i>
+                </button>
+            </div>
+            <div class="flex flex-col gap-6">
+                <a href="#home" class="text-2xl font-semibold text-white hover:text-gold-400 transition-colors mobile-link">Home</a>
+                <a href="#inside" class="text-2xl font-semibold text-white hover:text-gold-400 transition-colors mobile-link">Inside Kitchen</a>
+                <a href="#menu" class="text-2xl font-semibold text-white hover:text-gold-400 transition-colors mobile-link">Menu</a>
+                <a href="#gallery" class="text-2xl font-semibold text-white hover:text-gold-400 transition-colors mobile-link">Gallery</a>
+                <a href="#booking" class="mt-4 px-6 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-navy-950 text-lg font-bold rounded-2xl text-center mobile-link">Book Now</a>
             </div>
         </div>
     </div>
 
-    <!-- Header Banner Block Section -->
-    <div class="hero">
-        <h1>Welela Kitchen</h1>
-        <p>Gourmet Restaurant & Event Catering Excellence</p>
-    </div>
+    <!-- ==================== HERO ==================== -->
+    <section id="home" class="hero-kitchen relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Glow orbs -->
+        <div class="glow-orb w-[600px] h-[600px] bg-blue-600/10 top-1/4 -left-40 absolute"></div>
+        <div class="glow-orb w-[400px] h-[400px] bg-gold-500/5 bottom-1/4 -right-20 absolute"></div>
 
-    <div class="main-content">
+        <!-- Steam effects -->
+        <div class="absolute bottom-40 left-1/4 flex gap-3">
+            <div class="steam-line" style="animation-delay: 0s;"></div>
+            <div class="steam-line" style="animation-delay: 0.5s;"></div>
+            <div class="steam-line" style="animation-delay: 1s;"></div>
+            <div class="steam-line" style="animation-delay: 1.5s;"></div>
+        </div>
 
-        <!-- Restaurant Profile Descriptive Card -->
-        <div class="fancy-card" id="services-section">
-            <div class="card-img-banner restaurant-bg">🍽️</div>
-            <div class="card-body">
-                <h2>Restaurant Profile</h2>
-                
-                <div class="info-row">
-                    <span class="info-icon">📍</span>
-                    <div class="info-txt">
-                        <strong>Location Address</strong>
-                        Gerji, Addis Ababa (Near Main Road)
-                    </div>
+        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+            <!-- Badge -->
+            <div class="reveal inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold-500/20 bg-gold-500/5 backdrop-blur-sm mb-8">
+                <span class="w-2 h-2 rounded-full bg-gold-400 animate-pulse"></span>
+                <span class="text-xs font-semibold text-gold-400 tracking-wide uppercase">Now Accepting Bookings</span>
+            </div>
+
+            <!-- Heading -->
+            <h1 class="reveal text-5xl sm:text-6xl lg:text-8xl font-extrabold text-white leading-[1.05] tracking-tight mb-6" style="transition-delay: 100ms;">
+                Welcome Inside<br>
+                <span class="gold-shimmer">Welela Kitchen</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="reveal text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed" style="transition-delay: 200ms;">
+                From our flames to your table — authentic flavors crafted with love, 
+                served with pride. Catering for every occasion, every budget.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4" style="transition-delay: 300ms;">
+                <a href="#menu" class="px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-navy-950 font-bold rounded-full text-base hover:shadow-xl hover:shadow-gold-500/25 hover:-translate-y-1 transition-all flex items-center gap-2">
+                    <i data-lucide="utensils" class="w-5 h-5"></i>
+                    Explore Menu
+                </a>
+                <a href="#booking" class="px-8 py-4 border border-white/15 text-white font-semibold rounded-full text-base hover:border-gold-400/40 hover:text-gold-400 hover:-translate-y-1 transition-all flex items-center gap-2">
+                    <i data-lucide="calendar-check" class="w-5 h-5"></i>
+                    Book Catering
+                </a>
+            </div>
+
+            <!-- Stats -->
+            <div class="reveal mt-16 grid grid-cols-3 gap-8 max-w-lg mx-auto" style="transition-delay: 400ms;">
+                <div>
+                    <p class="text-3xl font-bold text-white">500+</p>
+                    <p class="text-xs text-slate-500 mt-1">Events Served</p>
                 </div>
-
-                <div class="info-row">
-                    <span class="info-icon">🕒</span>
-                    <div class="info-txt">
-                        <strong>Service Operations</strong>
-                        Open daily from 6:00 AM up to 10:00 PM
-                    </div>
+                <div>
+                    <p class="text-3xl font-bold text-white">4.9★</p>
+                    <p class="text-xs text-slate-500 mt-1">Customer Rating</p>
                 </div>
-
-                <div class="info-row">
-                    <span class="info-icon">📞</span>
-                    <div class="info-txt">
-                        <strong>Contact Centers & Orders</strong>
-                        Direct Telegram Support: @Loyalblack
-                    </div>
+                <div>
+                    <p class="text-3xl font-bold text-white">8+</p>
+                    <p class="text-xs text-slate-500 mt-1">Years Experience</p>
                 </div>
             </div>
         </div>
 
-        <!-- Flat Un-nested Form Layout Block Components -->
-        <div class="fancy-card" id="booking-section">
-            <div class="card-img-banner catering-bg">🎉</div>
-            <div class="card-body">
-                <h2>Catering Request Form</h2>
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+            <span class="text-[10px] text-slate-500 tracking-widest uppercase">Scroll</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i>
+        </div>
+    </section>
+
+    <!-- ==================== INSIDE THE KITCHEN ==================== -->
+    <section id="inside" class="relative py-24 lg:py-32 overflow-hidden">
+        <div class="glow-orb w-[500px] h-[500px] bg-blue-500/8 top-0 right-0 absolute"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <!-- Section Header -->
+            <div class="reveal text-center mb-16">
+                <span class="text-xs font-bold text-gold-400 tracking-widest uppercase">Behind The Scenes</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-3 tracking-tight">Step Inside Our Kitchen</h2>
+                <p class="text-slate-400 mt-4 max-w-xl mx-auto">This is where the magic happens — fresh ingredients, open flames, and recipes passed down through generations.</p>
+            </div>
+
+            <!-- Kitchen Peek Grid -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Large Image -->
+                <div class="reveal md:col-span-2 md:row-span-2 gallery-item relative group cursor-pointer" style="transition-delay: 100ms;">
+                    <img src="https://picsum.photos/seed/welela-chef-cooking/800/600.jpg" alt="Chef Cooking" class="w-full h-full object-cover min-h-[300px] md:min-h-full">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <span class="px-3 py-1 rounded-full bg-gold-500/20 text-gold-400 text-xs font-semibold">LIVE KITCHEN</span>
+                        <h3 class="text-2xl font-bold text-white mt-2">Our Open-Flame Cooking</h3>
+                        <p class="text-slate-400 text-sm mt-1">Every dish starts with real fire, real smoke, real flavor.</p>
+                    </div>
+                </div>
+
+                <!-- Small Image 1 -->
+                <div class="reveal gallery-item relative group cursor-pointer" style="transition-delay: 200ms;">
+                    <img src="https://picsum.photos/seed/welela-spices-prep/400/300.jpg" alt="Spice Preparation" class="w-full h-48 md:h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <p class="text-white font-semibold text-sm">Fresh Spices Daily</p>
+                    </div>
+                </div>
+
+                <!-- Small Image 2 -->
+                <div class="reveal gallery-item relative group cursor-pointer" style="transition-delay: 300ms;">
+                    <img src="https://picsum.photos/seed/welela-plating-food/400/300.jpg" alt="Food Plating" class="w-full h-48 md:h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <p class="text-white font-semibold text-sm">Beautiful Plating</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kitchen Features -->
+            <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-4 mt-8" style="transition-delay: 400ms;">
+                <div class="flex items-center gap-3 p-4 rounded-2xl border border-white/5 bg-navy-800/30">
+                    <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="flame" class="w-5 h-5 text-orange-400"></i>
+                    </div>
+                    <span class="text-sm font-medium text-slate-300">Wood-Fire Grill</span>
+                </div>
+                <div class="flex items-center gap-3 p-4 rounded-2xl border border-white/5 bg-navy-800/30">
+                    <div class="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="leaf" class="w-5 h-5 text-green-400"></i>
+                    </div>
+                    <span class="text-sm font-medium text-slate-300">Fresh Ingredients</span>
+                </div>
+                <div class="flex items-center gap-3 p-4 rounded-2xl border border-white/5 bg-navy-800/30">
+                    <div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="heart" class="w-5 h-5 text-red-400"></i>
+                    </div>
+                    <span class="text-sm font-medium text-slate-300">Made With Love</span>
+                </div>
+                <div class="flex items-center gap-3 p-4 rounded-2xl border border-white/5 bg-navy-800/30">
+                    <div class="w-10 h-10 rounded-xl bg-gold-500/10 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="award" class="w-5 h-5 text-gold-400"></i>
+                    </div>
+                    <span class="text-sm font-medium text-slate-300">Hygiene Certified</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MENU WITH PRICE TIERS ==================== -->
+    <section id="menu" class="relative py-24 lg:py-32 blue-texture-strong">
+        <div class="glow-orb w-[500px] h-[500px] bg-gold-500/5 bottom-0 left-1/2 -translate-x-1/2 absolute"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <!-- Section Header -->
+            <div class="reveal text-center mb-12">
+                <span class="text-xs font-bold text-gold-400 tracking-widest uppercase">Our Offerings</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-3 tracking-tight">Choose Your Budget</h2>
+                <p class="text-slate-400 mt-4 max-w-xl mx-auto">Great food doesn't have to break the bank. Pick a tier that fits your event.</p>
+            </div>
+
+            <!-- Price Tier Tabs -->
+            <div class="reveal flex flex-wrap justify-center gap-3 mb-12" style="transition-delay: 100ms;">
+                <button onclick="switchTab('below200')" id="tab-below200" class="tab-btn active-tab px-6 py-3 rounded-full border border-white/10 text-sm font-semibold text-slate-400 flex items-center gap-2">
+                    <i data-lucide="tag" class="w-4 h-4"></i>
+                    Below $200
+                </button>
+                <button onclick="switchTab('mid200')" id="tab-mid200" class="tab-btn px-6 py-3 rounded-full border border-white/10 text-sm font-semibold text-slate-400 flex items-center gap-2">
+                    <i data-lucide="wallet" class="w-4 h-4"></i>
+                    $200 – $1,000
+                </button>
+                <button onclick="switchTab('above1000')" id="tab-above1000" class="tab-btn px-6 py-3 rounded-full border border-white/10 text-sm font-semibold text-slate-400 flex items-center gap-2">
+                    <i data-lucide="crown" class="w-4 h-4"></i>
+                    Above $1,000
+                </button>
+            </div>
+
+            <!-- Menu Cards Container -->
+            <div id="menuContainer" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Cards injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PHOTO GALLERY ==================== -->
+    <section id="gallery" class="relative py-24 lg:py-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="reveal text-center mb-16">
+                <span class="text-xs font-bold text-gold-400 tracking-widest uppercase">Our Work</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-3 tracking-tight">Food Gallery</h2>
+                <p class="text-slate-400 mt-4 max-w-xl mx-auto">A glimpse of what we serve at events, parties, and daily catering.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="reveal gallery-item col-span-2 row-span-2 relative group" style="transition-delay: 50ms;">
+                    <img src="https://picsum.photos/seed/welela-biryani/600/600.jpg" alt="Biryani" class="w-full h-full object-cover min-h-[250px]">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <p class="absolute bottom-4 left-4 text-white font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">Special Biryani</p>
+                </div>
+                <div class="reveal gallery-item relative group" style="transition-delay: 100ms;">
+                    <img src="https://picsum.photos/seed/welela-kebab/300/300.jpg" alt="Kebabs" class="w-full h-40 md:h-48 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <p class="absolute bottom-3 left-3 text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">Seekh Kebabs</p>
+                </div>
+                <div class="reveal gallery-item relative group" style="transition-delay: 150ms;">
+                    <img src="https://picsum.photos/seed/welela-naan/300/300.jpg" alt="Naan" class="w-full h-40 md:h-48 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <p class="absolute bottom-3 left-3 text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">Tandoori Naan</p>
+                </div>
+                <div class="reveal gallery-item relative group" style="transition-delay: 200ms;">
+                    <img src="https://picsum.photos/seed/welela-curry-dish/300/300.jpg" alt="Curry" class="w-full h-40 md:h-48 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <p class="absolute bottom-3 left-3 text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">Rich Curry</p>
+                </div>
+                <div class="reveal gallery-item relative group" style="transition-delay: 250ms;">
+                    <img src="https://picsum.photos/seed/welela-dessert-sweet/300/300.jpg" alt="Dessert" class="w-full h-40 md:h-48 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <p class="absolute bottom-3 left-3 text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">Desserts</p>
+                </div>
+                <div class="reveal gallery-item col-span-2 relative group" style="transition-delay: 300ms;">
+                    <img src="https://picsum.photos/seed/welela-catering-event/600/300.jpg" alt="Event Catering" class="w-full h-48 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <p class="absolute bottom-4 left-4 text-white font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">Event Catering Setup</p>
+                </div>
+                <div class="reveal gallery-item relative group" style="transition-delay: 350ms;">
+                    <img src="https://picsum.photos/seed/welela-drinks-juice/300/300.jpg" alt="Drinks" class="w-full h-48 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <p class="absolute bottom-3 left-3 text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">Fresh Drinks</p>
+                </div>
+                <div class="reveal gallery-item relative group" style="transition-delay: 400ms;">
+                    <img src="https://picsum.photos/seed/welela-salad-fresh/300/300.jpg" alt="Salad" class="w-full h-48 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <p class="absolute bottom-3 left-3 text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">Fresh Salads</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIALS ==================== -->
+    <section class="relative py-24 lg:py-32 blue-texture-strong">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="reveal text-center mb-16">
+                <span class="text-xs font-bold text-gold-400 tracking-widest uppercase">Testimonials</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-3 tracking-tight">What People Say</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="reveal p-8 rounded-3xl border border-white/5 bg-navy-800/30 backdrop-blur-sm hover:border-gold-500/20 transition-colors" style="transition-delay: 100ms;">
+                    <div class="flex gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 text-gold-400 fill-gold-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold-400 fill-gold-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold-400 fill-gold-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold-400 fill-gold-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold-400 fill-gold-400"></i>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">"Welela catered my wedding — 300 guests, and every single person asked who made the food. Absolutely incredible biryani and kebabs!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">A</div>
+                        <div>
+                            <p class="text-white text-sm font-semibold">Amina K.</p>
+                            <p class="text-slate-500 text-xs">Wedding Catering</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal p-8 rounded-3xl border border-white/5 bg-navy-800/30 backdrop-blur-sm hover:border-gold-500/20 transition-colors" style="transition-delay: 200ms;">
+                    <div class="flex gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 text-gold-400 fill-gold-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold-400 fill-gold-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold-400 fill-gold-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold-400 fill-gold-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold-400 fill-gold-400"></i>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">"Best budget-friendly catering I've found. They fed our entire office party for under $200 and the food tasted like a million bucks."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white font-bold text-sm">J</div>
+                        <div>
+                            <p class="text-white text-sm font-semibold">James M.</p>
+                            <p class="text-slate-500 text-xs">Corporate Event</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal p-8 rounded-3xl border border-white/5 bg-navy-800/30 backdrop-blur-sm hover:border-gold-500/20 transition-colors" style="transition-delay: 300ms;">
+                    <div class="flex gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 text-gold-400 fill-gold-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold-400 fill-gold-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold-400 fill-gold-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold-400 fill-gold-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold-400 fill-gold-400"></i>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">"I've used Welela for 5 different events now. Consistent quality, always on time, and they set up everything beautifully."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-400 to-orange-500 flex items-center justify-center text-white font-bold text-sm">S</div>
+                        <div>
+                            <p class="text-white text-sm font-semibold">Sarah L.</p>
+                            <p class="text-slate-500 text-xs">Repeat Customer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== BOOKING SECTION ==================== -->
+    <section id="booking" class="relative py-24 lg:py-32">
+        <div class="glow-orb w-[600px] h-[600px] bg-blue-600/8 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute"></div>
+
+        <div class="max-w-4xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="reveal text-center mb-12">
+                <span class="text-xs font-bold text-gold-400 tracking-widest uppercase">Reserve Your Date</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-3 tracking-tight">Book Your Catering</h2>
+                <p class="text-slate-400 mt-4">Fill in the details below and we'll get back to you within 2 hours.</p>
+            </div>
+
+            <div class="reveal rounded-3xl border border-white/5 bg-navy-800/20 backdrop-blur-sm p-8 md:p-12" style="transition-delay: 100ms;">
+                <form id="bookingForm" onsubmit="handleBooking(event)">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Name -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Full Name *</label>
+                            <input type="text" required placeholder="John Doe" class="form-input w-full px-4 py-3.5 rounded-xl text-sm">
+                        </div>
+                        <!-- Phone -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Phone Number *</label>
+                            <input type="tel" required placeholder="+254 7XX XXX XXX" class="form-input w-full px-4 py-3.5 rounded-xl text-sm">
+                        </div>
+                        <!-- Email -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+                            <input type="email" placeholder="you@email.com" class="form-input w-full px-4 py-3.5 rounded-xl text-sm">
+                        </div>
+                        <!-- Event Type -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Event Type *</label>
+                            <select required class="form-input w-full px-4 py-3.5 rounded-xl text-sm">
+                                <option value="" class="bg-navy-800">Select event type</option>
+                                <option value="wedding" class="bg-navy-800">Wedding</option>
+                                <option value="birthday" class="bg-navy-800">Birthday Party</option>
+                                <option value="corporate" class="bg-navy-800">Corporate Event</option>
+                                <option value="family" class="bg-navy-800">Family Gathering</option>
+                                <option value="funeral" class="bg-navy-800">Funeral / Memorial</option>
+                                <option value="other" class="bg-navy-800">Other</option>
+                            </select>
+                        </div>
+                        <!-- Date -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Event Date *</label>
+                            <input type="date" required class="form-input w-full px-4 py-3.5 rounded-xl text-sm">
+                        </div>
+                        <!-- Guests -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Number of Guests *</label>
+                            <input type="number" required min="1" placeholder="50" class="form-input w-full px-4 py-3.5 rounded-xl text-sm">
+                        </div>
+                        <!-- Budget -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Budget Range *</label>
+                            <select required class="form-input w-full px-4 py-3.5 rounded-xl text-sm">
+                                <option value="" class="bg-navy-800">Select budget</option>
+                                <option value="below200" class="bg-navy-800">Below $200</option>
+                                <option value="200-1000" class="bg-navy-800">$200 – $1,000</option>
+                                <option value="above1000" class="bg-navy-800">Above $1,000</option>
+                            </select>
+                        </div>
+                        <!-- Location -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Venue / Location</label>
+                            <input type="text" placeholder="Event address or venue name" class="form-input w-full px-4 py-3.5 rounded-xl text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Special Requests -->
+                    <div class="mt-6">
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Special Requests / Menu Preferences</label>
+                        <textarea rows="4" placeholder="Any dietary requirements, specific dishes you want, decoration needs..." class="form-input w-full px-4 py-3.5 rounded-xl text-sm resize-none"></textarea>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="mt-8 w-full py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-navy-950 font-bold text-base rounded-2xl hover:shadow-xl hover:shadow-gold-500/25 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="send" class="w-5 h-5"></i>
+                        Submit Booking Request
+                    </button>
+
+                    <p class="text-center text-xs text-slate-500 mt-4">We'll confirm your booking via phone or email within 2 hours.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT / MAP ==================== -->
+    <section class="relative py-24 lg:py-32 blue-texture-strong">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="reveal grid md:grid-cols-2 gap-12 items-center">
+                <!-- Contact Info -->
+                <div>
+                    <span class="text-xs font-bold text-gold-400 tracking-widest uppercase">Get In Touch</span>
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-3 tracking-tight">Visit Our Kitchen</h2>
+                    <p class="text-slate-400 mt-4 leading-relaxed">Come see us in person! You're always welcome to visit the kitchen, taste our food, and discuss your catering needs directly.</p>
+
+                    <div class="mt-8 space-y-5">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-blue-400"></i>
+                            </div>
+                            <div>
+                                <p class="text-white font-semibold text-sm">Location</p>
+                                <p class="text-slate-400 text-sm">Welela Kitchen, Main Street, Near Town Center</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="phone" class="w-5 h-5 text-green-400"></i>
+                            </div>
+                            <div>
+                                <p class="text-white font-semibold text-sm">Phone / WhatsApp</p>
+                                <p class="text-slate-400 text-sm">+254 7XX XXX XXX</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-gold-500/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="clock" class="w-5 h-5 text-gold-400"></i>
+                            </div>
+                            <div>
+                                <p class="text-white font-semibold text-sm">Working Hours</p>
+                                <p class="text-slate-400 text-sm">Mon – Sat: 6:00 AM – 10:00 PM</p>
+                                <p class="text-slate-400 text-sm">Sunday: 8:00 AM – 8:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="flex gap-3 mt-8">
+                        <a href="#" class="w-11 h-11 rounded-xl border border-white/10 flex items-center justify-center hover:border-gold-400/40 hover:text-gold-400 text-slate-400 transition-all">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-11 h-11 rounded-xl border border-white/10 flex items-center justify-center hover:border-gold-400/40 hover:text-gold-400 text-slate-400 transition-all">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-11 h-11 rounded-xl border border-white/10 flex items-center justify-center hover:border-gold-400/40 hover:text-gold-400 text-slate-400 transition-all">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-11 h-11 rounded-xl border border-white/10 flex items-center justify-center hover:border-green-400/40 hover:text-green-400 text-slate-400 transition-all">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Map Placeholder -->
+                <div class="reveal rounded-3xl overflow-hidden border border-white/5 relative h-[400px] md:h-[500px]" style="transition-delay: 200ms;">
+                    <img src="https://picsum.photos/seed/welela-kitchen-exterior/800/600.jpg" alt="Welela Kitchen Exterior" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-navy-950/40"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-full bg-gold-500/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 border border-gold-500/30">
+                                <i data-lucide="map-pin" class="w-8 h-8 text-gold-400"></i>
+                            </div>
+                            <p class="text-white font-bold text-lg">Welela Kitchen</p>
+                            <p class="text-slate-300 text-sm mt-1">Tap for directions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="border-t border-white/5 py-12">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center">
+                        <i data-lucide="chef-hat" class="w-4 h-4 text-navy-950"></i>
+                    </div>
+                    <span class="text-sm font-semibold text-white">Welela Kitchen & Catering</span>
+                </div>
+                <p class="text-xs text-slate-500">© 2025 Welela Kitchen. All rights reserved. Crafted with ❤️</p>
+                <div class="flex gap-6">
+                    <a href="#home" class="text-xs text-slate-500 hover:text-gold-400 transition-colors">Home</a>
+                    <a href="#menu" class="text-xs text-slate-500 hover:text-gold-400 transition-colors">Menu</a>
+                    <a href="#booking" class="text-xs text-slate-500 hover:text-gold-400 transition-colors">Book</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        // ===== MENU DATA =====
+        const menuData = {
+            below200: [
+                { name: "Family Meal Pack", desc: "Rice, 2 curries, naan, salad — feeds 6-8 people", price: "$80", img: "welela-family-meal", tag: "POPULAR" },
+                { name: "Party Starter Box", desc: "Samosas, kebabs, spring rolls, dips for 15 people", price: "$120", img: "welela-starter-box", tag: "BEST VALUE" },
+                { name: "Mini Catering Bundle", desc: "One main dish, rice, drinks for 20 guests", price: "$180", img: "welela-mini-catering", tag: "" },
+                { name: "Office Lunch Deal", desc: "Complete lunch for 10 people with dessert", price: "$150", img: "welela-office-lunch", tag: "" },
+                { name: "Kids Party Pack", desc: "Fun finger foods, juice, mini cakes for 15 kids", price: "$100", img: "welela-kids-party", tag: "FUN" },
+                { name: "Date Night Special", desc: "3-course meal for 2 with candle setup", price: "$60", img: "welela-date-night", tag: "ROMANTIC" },
+            ],
+            mid200: [
+                { name: "Birthday Bash Package", desc: "Full menu for 50 guests with decor setup", price: "$450", img: "welela-birthday-bash", tag: "POPULAR" },
+                { name: "Corporate Lunch", desc: "Premium 3-course meal for 30 executives", price: "$600", img: "welela-corporate-lunch", tag: "PREMIUM" },
+                { name: "Engagement Party", desc: "Starter, main, dessert, drinks for 80 guests", price: "$800", img: "welela-engagement", tag: "" },
+                { name: "Weekend BBQ Feast", desc: "Grilled meats, sides, drinks for 60 people", price: "$550", img: "welela-bbq-feast", tag: "NEW" },
+                { name: "Cultural Event Menu", desc: "Traditional dishes for 100 guests", price: "$900", img: "welela-cultural-food", tag: "" },
+                { name: "Anniversary Dinner", desc: "Elegant 5-course dinner for 40 guests", price: "$700", img: "welela-anniversary", tag: "ELEGANT" },
+            ],
+            above1000: [
+                { name: "Wedding Premium Package", desc: "Full-service catering for 200+ guests, 8 dishes", price: "$2,500", img: "welela-wedding-premium", tag: "LUXURY" },
+                { name: "Royal Feast", desc: "12-course grand meal for 300 guests with live stations", price: "$4,000", img: "welela-royal-feast", tag: "EXCLUSIVE" },
+                { name: "Mega Event Package", desc: "500+ guests, full decor, waiters, everything", price: "$6,500", img: "welela-mega-event", tag: "GRAND" },
+                { name: "VIP Corporate Gala", desc: "Black-tie dinner for 150 with premium service", price: "$3,000", img: "welela-vip-gala", tag: "PREMIUM" },
+                { name: "Destination Wedding Pack", desc: "Full catering + travel setup for out-of-town events", price: "$5,000", img: "welela-destination", tag: "NEW" },
+                { name: "Custom Premium", desc: "Tell us your dream — we'll make it happen", price: "Custom", img: "welela-custom-premium", tag: "BESPOKE" },
+            ]
+        };
+
+        let currentTab = 'below200';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active-tab'));
+            document.getElementById('tab-' + tab).classList.add('active-tab');
+            renderMenu();
+        }
+
+        function renderMenu() {
+            const container = document.getElementById('menuContainer');
+            const items = menuData[currentTab];
+
+            container.innerHTML = items.map((item, i) => `
+                <div class="menu-card rounded-3xl bg-navy-800/30 backdrop-blur-sm overflow-hidden group" style="animation: fadeInUp 0.5s ${i * 80}ms both;">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://picsum.photos/seed/${item.img}/400/300.jpg" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-800/60 to-transparent"></div>
+                        ${item.tag ? `<span class="price-badge absolute top-3 right-3 px-3 py-1 rounded-full bg-gold-500 text-navy-950 text-[10px] font-bold tracking-wide">${item.tag}</span>` : ''}
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-start justify-between gap-3 mb-2">
+                            <h3 class="text-white font-bold text-base">${item.name}</h3>
+                            <span class="text-gold-400 font-extrabold text-lg whitespace-nowrap">${item.price}</span>
+                        </div>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-5">${item.desc}</p>
+                        <a href="#booking" class="inline-flex items-center gap-2 text-sm font-semibold text-gold-400 hover:text-gold-300 transition-colors group/link">
+                            Book This
+                            <i data-lucide="arrow-right" class="w-4 h-4 group-hover/link:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+
+            // Re-init lucide icons for new elements
+            lucide.createIcons();
+        }
+
+        // Fade-in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initial render
+        renderMenu();
+
+        // ===== BOOKING FORM =====
+        function handleBooking(e) {
+            e.preventDefault();
+            showToast('Booking Submitted! ✅', 'We\'ll contact you within 2 hours to confirm.');
+            e.target.reset();
+        }
+
+        // ===== TOAST =====
+        function showToast(title, msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-msg').textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 5000);
+        }
+
+        // ===== NAVBAR SCROLL EFFECT =====
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(2, 6, 23, 0.9)';
+                navbar.style.backdropFilter = 'blur(20px)';
+                navbar.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+            } else {
+                navbar.style.background = 'transparent';
+                navbar.style.backdropFilter = 'none';
+                navbar.style.borderBottom = 'none';
+            }
+        });
+
+        // ===== MOBILE MENU =====
+        const mobileMenu = document.getElementById('mobileMenu');
+        document.getElementById('menuToggle').addEventListener('click', () => mobileMenu.classList.add('open'));
+        document.getElementById('menuClose').addEventListener('click', () => mobileMenu.classList.remove('open'));
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        });
+
+        // ===== SCROLL REVEAL =====
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // ===== FLOATING PARTICLES =====
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (8 + Math.random() * 12) + 's';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.width = (2 + Math.random() * 4) + 'px';
+                particle.style.height = particle.style.width;
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // ===== INIT LUCIDE ICONS =====
+        lucide.createIcons();
+    </script>
+</body>
+</html>
